@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SX TUR - Free Fire Tournament App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff004f;
+            --secondary: #ff8400;
+            --bg-dark: #0f0f1b;
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-dark), #12122b, #1c1c3c);
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        header {
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px var(--primary);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero {
+            padding: 60px 8% 100px 8%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 320px;
+        }
+
+        .hero-text h2 {
+            font-size: clamp(32px, 5vw, 54px);
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: #b0b0c0;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .stat span {
+            display: block;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--secondary);
+            text-shadow: 0 0 10px rgba(255, 132, 0, 0.3);
+        }
+
+        .stat label {
+            font-size: 14px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 35px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(255, 0, 79, 0.3);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 132, 0, 0.5);
+        }
+
+        /* Carousel Section */
+        .carousel-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .carousel {
+            overflow: hidden;
+            border-radius: 30px;
+            border: 8px solid #2a2a4a;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            background: #000;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        .carousel img {
+            width: 100%;
+            display: block;
+        }
+
+        .carousel-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+            gap: 12px;
+        }
+
+        .carousel-buttons button {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .carousel-buttons button.active {
+            background: var(--secondary);
+            transform: scale(1.4);
+            box-shadow: 0 0 10px var(--secondary);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 8%;
+            background: rgba(0,0,0,0.2);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: var(--primary);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 10px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: #666;
+            font-size: 14px;
+        }
+
+        @media(max-width:900px){
+            header { padding: 15px 5%; }
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 40px;
+            }
+            .hero-text p { margin-left: auto; margin-right: auto; }
+            .stats { justify-content: center; }
+            .cta-group { justify-content: center; }
+            .carousel-container { max-width: 280px; margin: 0 auto; }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <img src="https://i.supaimg.com/d47105bc-ffd7-4602-81d2-b5965a10deaa/d36aa3ea-4c16-4aec-818b-8fd83d02bbe2.jpg" alt="SX TUR Logo">
+        <h1>SX TUR</h1>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-text">
+        <h2>Dominate the Arena,<br>Earn Real Rewards</h2>
+        <p>
+            Experience the ultimate Free Fire tournament platform in Bangladesh. Join matches, showcase your skills, and withdraw your winnings instantly to bKash or Nagad.
+        </p>
+
+        <div class="stats">
+            <div class="stat">
+                <span>10K+</span>
+                <label>Downloads</label>
+            </div>
+            <div class="stat">
+                <span>7.6K+</span>
+                <label>Active Gamers</label>
+            </div>
+            <div class="stat">
+                <span>4.8★</span>
+                <label>Rating</label>
+            </div>
+        </div>
+
+        <div class="cta-group">
+            <a href="https://www.mediafire.com/file/dfmdjbylmd7i737/SBR+TUR+.apk/file" class="download-btn" target="_blank">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                Download APK
+            </a>
+        </div>
+    </div>
+
+    <div class="carousel-container">
+        <div class="carousel">
+            <div class="carousel-track">
+                <img src="https://i.supaimg.com/d47105bc-ffd7-4602-81d2-b5965a10deaa/4a8238db-6ef7-4143-81e9-f179dc8079d2.jpg" alt="App Screen 1">
+                <img src="https://i.supaimg.com/d47105bc-ffd7-4602-81d2-b5965a10deaa/08544c82-cc10-4c02-b17e-fa2fa1226247.jpg" alt="App Screen 2">
+                <img src="https://i.supaimg.com/d47105bc-ffd7-4602-81d2-b5965a10deaa/f18c35a1-62bf-47f4-9b92-0fd82374d3cf.jpg" alt="App Screen 3">
+                <img src="https://i.supaimg.com/d47105bc-ffd7-4602-81d2-b5965a10deaa/0cedb7da-bd19-4b1d-a21a-2518c70dff1f.jpg" alt="App Screen 4">
+                <img src="https://i.supaimg.com/d47105bc-ffd7-4602-81d2-b5965a10deaa/6f9dd8bb-1a90-4ca7-a909-445063616691.jpg" alt="App Screen 5">
+            </div>
+        </div>
+        <div class="carousel-buttons">
+            <button class="active"></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="feature-card">
+        <h3>Fast Payouts</h3>
+        <p>Get your winnings in minutes. We support bKash, Nagad, and Rocket for lightning-fast withdrawals.</p>
+    </div>
+    <div class="feature-card">
+        <h3>Daily Tournaments</h3>
+        <p>New matches every hour. From Solo to Squad, there's always a battle waiting for you.</p>
+    </div>
+    <div class="feature-card">
+        <h3>Anti-Cheat System</h3>
+        <p>Fair play is our priority. We use advanced monitoring to ensure a hacker-free environment.</p>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 SX TUR Esports Platform. Built for Champions.</p>
+</footer>
+
+<script>
+    const track = document.querySelector('.carousel-track');
+    const buttons = document.querySelectorAll('.carousel-buttons button');
+    const slides = document.querySelectorAll('.carousel img');
+    let index = 0;
+    let autoPlay;
+
+    function updateCarousel() {
+        track.style.transform = `translateX(-${index * 100}%)`;
+        buttons.forEach(btn => btn.classList.remove('active'));
+        buttons[index].classList.add('active');
+    }
+
+    function startAutoPlay() {
+        autoPlay = setInterval(() => {
+            index = (index + 1) % slides.length;
+            updateCarousel();
+        }, 4000);
+    }
+
+    buttons.forEach((button, i) => {
+        button.addEventListener('click', () => {
+            clearInterval(autoPlay);
+            index = i;
+            updateCarousel();
+            startAutoPlay();
+        });
+    });
+
+    // Initialize
+    window.onload = startAutoPlay;
+</script>
+
+</body>
+</html>
